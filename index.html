@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мои материалы по английскому</title>
+  
+  <!-- Подключение шрифта Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* === ФОН === */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0, #a29bfe, #55efc4);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      color: #2c3e50;
+      padding: 20px;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* === ЗАГОЛОВОК === */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 2.6em;
+      color: #ffffff;
+      text-shadow:
+        0 2px 4px rgba(0,0,0,0.25),
+        0 4px 8px rgba(0,0,0,0.2);
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 12px 24px;
+      border-radius: 16px;
+      display: inline-block;
+    }
+
+    .subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1.25em;
+      color: #2980b9;
+      max-width: 650px;
+      margin: 15px auto 0;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.6);
+    }
+
+    /* === КАРТОЧКИ === */
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.94);
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      width: 280px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 3px solid #f1c40f;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      border: 2px solid #ecf0f1;
+    }
+
+    .product-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.3em;
+      margin: 10px 0 8px;
+      color: #2c3e50;
+    }
+
+    .product-card p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95em;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-weight: 800;
+      color: #27ae60;
+      font-size: 1.3em;
+      margin: 12px 0;
+    }
+
+    .buy-btn {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1.1em;
+      font-weight: 700;
+      width: 100%;
+      margin-top: 10px;
+      transition: background 0.3s, transform 0.2s;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .buy-btn:hover {
+      background-color: #2980b9;
+      transform: scale(1.05);
+    }
+
+    /* === МОДАЛЬНОЕ ОКНО === */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.88);
+    }
+
+    .modal-content {
+      background: white;
+      margin: 5% auto;
+      padding: 25px;
+      width: 90%;
+      max-width: 700px;
+      border-radius: 20px;
+      position: relative;
+      animation: popIn 0.4s;
+      border: 4px dashed #f1c40f;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 32px;
+      font-weight: bold;
+      color: #e74c3c;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .close-btn:hover {
+      transform: rotate(90deg);
+      color: #c0392b;
+    }
+
+    .carousel {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      height: 320px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      height: 100%;
+    }
+
+    .carousel-images img {
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carousel-nav {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .carousel-nav button {
+      background: #3498db;
+      border: none;
+      padding: 10px 20px;
+      margin: 0 8px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+      font-size: 1.1em;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .carousel-nav button:hover {
+      background: #2980b9;
+    }
+
+    .modal h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1.7em;
+      margin-bottom: 12px;
+      color: #e74c3c;
+      text-align: center;
+    }
+
+    /* 🔥 ВАЖНО: поддержка переносов строк в описании */
+    .modal .description {
+      font-family: 'Poppins', sans-serif;
+      margin: 15px 0;
+      font-size: 1.05em;
+      color: #2c3e50;
+      line-height: 1.7;
+      white-space: pre-line; /* ← это позволяет \n работать как перенос */
+    }
+
+    #modal-buy-btn {
+      background-color: #27ae60;
+      padding: 12px 25px;
+      font-size: 1.2em;
+      margin-top: 20px;
+      border-radius: 50px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+    }
+
+    #modal-buy-btn:hover {
+      background-color: #219653;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.1em;
+        padding: 10px 16px;
+      }
+      .subtitle {
+        font-size: 1.1em;
+      }
+      .product-card {
+        width: 100%;
+        max-width: 320px;
+      }
+      .carousel {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📚 English flashcards and workbooks</h1>
+    <p class="subtitle">Карточки для уроков английского и интерактивные рабочие тетради по мультфильмам</p>
+  </header>
+
+  <div class="products">
+    <div class="product-card" data-product-id="1">
+      <img src="images/pet1.jpg" alt="Словарные карточки">
+      <h3>Animals flashcards</h3>
+      <p>Яркие карточки для изучения домашних животных</p>
+      <div class="price">150 ₽</div>
+      <button class="buy-btn">Купить</button>
+    </div>
+
+    <div class="product-card" data-product-id="2">
+      <img src="images/chores-cover.jpg" alt="Тетрадь по Паддингтону">
+      <h3>Paddington and the Chores List</h3>
+      <p>Рабочая тетрадь по мультфильму</p>
+      <div class="price">385 ₽</div>
+      <button class="buy-btn">Купить</button>
+    </div>
+  </div>
+
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div class="carousel">
+        <div class="carousel-images"></div>
+      </div>
+      <div class="carousel-nav"></div>
+      <h2 id="modal-title">Название товара</h2>
+      <div id="modal-price" class="price">0 ₽</div>
+      <p id="modal-description" class="description">Подробное описание появится здесь.</p>
+      <button id="modal-buy-btn" class="buy-btn">Купить</button>
+    </div>
+  </div>
+
+  <script>
+    const products = {
+      1: {
+        title: "Словарные карточки для начинающих",
+        price: "990 ₽",
+        description: "18 карточек с домашними животными, в том числе экзотическими.",
+        images: [
+          "images/pet2.jpg",
+          "https://via.placeholder.com/700x320/FFB6C1/000000?text=Карточки+2",
+          "https://via.placeholder.com/700x320/FFB6C1/000000?text=Пример+страницы"
+        ]
+      },
+      2: {
+        title: "Тетрадь по мультфильму: Paddington and the Chores List",
+        price: "385 ₽",
+        description: "Тетрадь с заданиями (workbook) к серии «Paddington and the Chores List» из мультсериала «The Adventures of Paddington».\n\n📖 Тетрадь состоит из:\n• 8 страниц\n• 13 заданий\n• 5 встроенных ссылок на видео и игры (ссылки можно открывать из распечатанного документа, отсканировав QR-код телефоном, или с экрана компьютера/ноутбука, нажав мышкой на QR-код).\n\n🎁 Дополнительно прилагаются:\n• флэш-карточки с героями мультфильма\n• флэш-карточки на тему «Chores»\n• тетрадь с ответами\n\n🎯 Повторение:\n• лексики на тему «Household Chores»\n• грамматики: Present Simple\n\nПодойдёт для повторения и закрепления грамматики и лексики для детей 2–4 класса, а также для прокачивания навыка аудирования детям и взрослым ЛЮБОГО возраста!",
+        images: [
+          "images/chores-cover.jpg",
+          "https://via.placeholder.com/700x320/87CEEB/000000?text=Страница+1",
+          "https://via.placeholder.com/700x320/87CEEB/000000?text=Страница+2"
+        ]
+      }
+    };
+
+    const modal = document.getElementById("productModal");
+    const closeBtn = document.querySelector(".close-btn");
+    const buyButtons = document.querySelectorAll(".buy-btn");
+    let currentProductId = null;
+    let currentImageIndex = 0;
+
+    function openModal(productId) {
+      const product = products[productId];
+      if (!product) return;
+      currentProductId = productId;
+      currentImageIndex = 0;
+      document.getElementById("modal-title").textContent = product.title;
+      document.getElementById("modal-price").textContent = product.price;
+      document.getElementById("modal-description").textContent = product.description;
+      const carouselImages = document.querySelector(".carousel-images");
+      const carouselNav = document.querySelector(".carousel-nav");
+      carouselImages.innerHTML = "";
+      carouselNav.innerHTML = "";
+      product.images.forEach(src => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = product.title;
+        carouselImages.appendChild(img);
+      });
+      if (product.images.length > 1) {
+        const prev = document.createElement("button");
+        prev.textContent = "❮";
+        prev.onclick = () => changeImage(-1);
+        const next = document.createElement("button");
+        next.textContent = "❯";
+        next.onclick = () => changeImage(1);
+        carouselNav.appendChild(prev);
+        carouselNav.appendChild(next);
+      }
+      modal.style.display = "block";
+    }
+
+    function changeImage(direction) {
+      const total = products[currentProductId].images.length;
+      currentImageIndex = (currentImageIndex + direction + total) % total;
+      document.querySelector(".carousel-images").style.transform = `translateX(-${currentImageIndex * 100}%)`;
+    }
+
+    buyButtons.forEach(btn => {
+      btn.addEventListener("click", function () {
+        const card = this.closest(".product-card");
+        openModal(card.dataset.productId);
+      });
+    });
+
+    closeBtn.addEventListener("click", () => modal.style.display = "none");
+    window.addEventListener("click", e => {
+      if (e.target === modal) modal.style.display = "none";
+    });
+
+    document.getElementById("modal-buy-btn").addEventListener("click", () => {
+      const product = products[currentProductId];
+      alert(`Вы выбрали: ${product.title}\nЦена: ${product.price}\nПереход к оплате...`);
+      // Пример реальной ссылки:
+      // window.location.href = "https://ваш-сайт.рф/paddington-workbook";
+    });
+  </script>
+</body>
+</html>
