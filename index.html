@@ -312,7 +312,7 @@
     const products = {
       1: {
         title: "Словарные карточки для начинающих",
-        price: "990 ₽",
+        price: "150 ₽",
         description: "18 карточек с домашними животными, в том числе экзотическими.",
         images: [
           "images/pet2.jpg",
@@ -389,9 +389,9 @@
 
     document.getElementById("modal-buy-btn").addEventListener("click", () => {
       const product = products[currentProductId];
-      alert(`Вы выбрали: ${product.title}\nЦена: ${product.price}\nПереход к оплате...`);
+      alert(`Вы выбрали: р{product.title}\nЦена: р{product.price}\nПереход к оплате...`);
       // Пример реальной ссылки:
-      // window.location.href = "https://ваш-сайт.рф/paddington-workbook";
+      // window.location.href = "https://vk.com/koltushienglish";
     });
   </script>
 </body>
