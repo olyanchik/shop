@@ -389,9 +389,8 @@
 
     document.getElementById("modal-buy-btn").addEventListener("click", () => {
       const product = products[currentProductId];
-      alert(`Вы выбрали: р{product.title}\nЦена: р{product.price}\nПереход к оплате...`);
-      // Пример реальной ссылки:
-      // window.location.href = "https://vk.com/koltushienglish";
+      alert(`Вы выбрали: ${product.title}\nЦена: ${product.price}\nПереход к оплате...`);
+      window.location.href = "https://vk.com/koltushienglish";
     });
   </script>
 </body>
